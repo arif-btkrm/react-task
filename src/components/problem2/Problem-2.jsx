@@ -14,9 +14,11 @@ const Problem2 = () => {
 
     const handleClick = (e)=>{
         // console.log(e)
-        // console.log(e.target.innerText)
+        //  console.log(e.target.id)
+         const id = e.target.id
         let gettitle = e.target.innerText;
-        history.push(gettitle);
+        // history.push(gettitle);
+        window.history.pushState({}, '', id );
         setTitle(gettitle)
         showModal()
     }
@@ -53,8 +55,8 @@ const Problem2 = () => {
                 <h4 className='text-center text-uppercase mb-5'>Problem-2</h4>
                 <div className="">
                     <div className="d-flex justify-content-center gap-3">
-                        <button  className="btn btn-lg btn-outline-primary" type="button"  onClick={handleClick}>All Contacts</button>
-                        <button  className="btn btn-lg btn-outline-warning" type="button"  onClick={handleClick}>US Contacts</button>
+                        <button  className="btn btn-lg btn-outline-primary" id="all-contacts" type="button"  onClick={handleClick}>All Contacts</button>
+                        <button  className="btn btn-lg btn-outline-warning" id="us-contacts" type="button"  onClick={handleClick}>US Contacts</button>
                         {/* <Link to='/problem-2/all-contacts' className="btn btn-lg btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> setTitle("All Contacts")}>All Contacts</Link> */}
                         {/* <Link to='/problem-2/us-contacts' className="btn btn-lg btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> setTitle("US Contacts")}>US Contacts</Link> */}
                         {/* <Link to='/problem-2/all-contacts' className="btn btn-lg btn-outline-warning"  onClick={handleClick} >Test Contacts</Link> */}

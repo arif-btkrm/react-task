@@ -27,9 +27,8 @@ function Modal({modalRef,show, hide,title}) {
     //     showModal();
     // },[])
     
-    const location = useLocation();
-    // console.log(location);
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
+    
     useEffect(()=>{
         fetch('https://contact.mediusware.com/api/contacts/?page_size=50)')
         .then((res)=> res.json())
