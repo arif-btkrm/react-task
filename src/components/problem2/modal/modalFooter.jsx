@@ -1,10 +1,12 @@
 import React from 'react';
 
-function ModalFooter(props) {
+function ModalFooter({setOnlyEven}) {
+    const handleChange = (e)=>{
+        setOnlyEven(e.target.checked)
+    }
     return (
         <div className="modal-footer">
-        <input type="checkbox"/>Only even
-        {/* <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> */}
+        <strong><input id="#even-only" type="checkbox" name="even" onChange={handleChange}/> Only even</strong>
       </div>
     );
 }

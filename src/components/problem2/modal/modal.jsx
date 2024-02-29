@@ -9,50 +9,72 @@ import {useNavigate,useLocation} from 'react-router-dom'
 function Modal({modalRef,show, hide,title}) {
 {/*
     US Link Constacts
-    https://contact.mediusware.com/api/country-contacts/United%20States/?page_size=50
+    https://contact.mediusware.com/api/country-contacts/United%20States/?page=1&page_size=15
 */}
 
-    // console.log(title)
-    // const modalRef = useRef()
-    // const showModal = () => {
-    //     const modalEle = modalRef.current
-    //     const bsModal = new bootstrap.Modal(modalEle, {
-    //         backdrop: 'static',
-    //         keyboard: false
-    //     })
-    //     bsModal.show()
-    // }
 
-    // useEffect(()=>{
-    //     showModal();
-    // },[])
-    
+    const [onlyEven, setOnlyEven] = useState(false)
     const [data, setData] = useState([]);
+    const [filteredData, setFilteredData] = useState([])
+    const [page,setPage] = useState(1); 
+    const [pageSize,setPageSize] = useState(20);
+    const allContact = `https://contact.mediusware.com/api/contacts/?page=${page}&page_size=${pageSize}`;
+    const usContact = `https://contact.mediusware.com/api/country-contacts/United%20States/?page=${page}&page_size=${pageSize}`;
+    const [url,setUrl]= useState("");
+    
+    
+       
+
+    
     
     useEffect(()=>{
-        fetch('https://contact.mediusware.com/api/contacts/?page_size=50)')
+        if(onlyEven == true){
+            // console.log(onlyEven)
+            let even = data.filter((item)=>{
+                if(parseInt(item.id) %2 === 0){
+                    return item;
+                } 
+            })
+            // console.log(even)
+            setFilteredData(even);
+        }
+        else{
+            setFilteredData(data);
+        }
+    },[onlyEven])
+
+    // useEffect(()=>{
+    //     setPage(`${page+1}`)
+    // },[])
+
+    useEffect( ()=>{
+        // console.log(title == "All Contacts")
+        const link = title.toString() == "All Contacts" ?  usContact :allContact ;
+        // console.log(link)
+        setUrl(link);
+        getData();
+    },[page,title])
+
+    const getData = async ()=>{
+        // console.log(url)
+        await fetch(url)
         .then((res)=> res.json())
         .then((data)=>{
-            setData(data.results)
+              setData(data.results)
+              setFilteredData(data.results)
+            //    console.log(data)
         })
-        console.log(data)
-    },[])
-
+    }  
 
     return (
        <>
         
- {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-   Launch static backdrop modal
- </button> */}
-
-
-<div className="modal fade" ref={modalRef} data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div id="mainModal" className="modal fade" ref={modalRef} data-bs-keyboard="false" tabIndex="-1"  aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
-        <ModalHeader title={title}/>
-        <ModalBody data = {data}/>
-        <ModalFooter/>
+        <ModalHeader handleModal = {hide} title={title}/>
+        <ModalBody handleModal = {show} data = {filteredData} />
+        <ModalFooter setOnlyEven = {setOnlyEven}/>
     </div>
   </div>
 </div>

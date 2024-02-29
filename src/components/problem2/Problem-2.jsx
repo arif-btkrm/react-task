@@ -1,7 +1,7 @@
 import React, { useState,useRef } from 'react';
 import Modal from './modal/modal';
 
-import {Link,Outlet,useNavigate,useLocation} from 'react-router-dom'
+import {Outlet,useNavigate,useLocation} from 'react-router-dom'
 
 
 
@@ -10,28 +10,24 @@ const Problem2 = () => {
     // console.log(location);
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
-    // const [showModal, setShowModal] = useState("");
 
     const handleClick = (e)=>{
-        // console.log(e)
-        //  console.log(e.target.id)
-         const id = e.target.id
-        let gettitle = e.target.innerText;
-        // history.push(gettitle);
+        const id = e.target.id
         window.history.pushState({}, '', id );
+        let gettitle = e.target.innerText;
         setTitle(gettitle)
         showModal()
     }
 
     const handleModalClose = ()=>{
-        navigate('/Problem2')
+        navigate('/problem-2')
         hideModal()
     }
 
 
     const modalRef = useRef()
-    
     const showModal = () => {
+        
         const modalEle = modalRef.current
         const bsModal = new bootstrap.Modal(modalEle, {
             backdrop: 'static',
@@ -66,7 +62,7 @@ const Problem2 = () => {
                     </div>
                 </div>
             </div>
-            <Modal modalRef={modalRef} show={showModal} hide={handleModalClose} title={title}/>
+            <Modal modalRef={modalRef} show={handleClick} hide={handleModalClose} title={title}/>
             <Outlet />
         </div>
     );
