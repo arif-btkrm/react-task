@@ -1,17 +1,11 @@
-import React, { useEffect, useState,useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ModalBody from './modalBody';
 import ModalFooter from './modalFooter';
 import ModalHeader from './modalHeader';
-import {useNavigate,useLocation} from 'react-router-dom'
 
 
 function Modal({modalRef,show, hide,title}) {
-{/*
-    US Link Constacts
-    https://contact.mediusware.com/api/country-contacts/United%20States/?page=1&page_size=15
-*/}
-
 
     const [onlyEven, setOnlyEven] = useState(false)
     const [data, setData] = useState([]);
@@ -23,19 +17,14 @@ function Modal({modalRef,show, hide,title}) {
     const [url,setUrl]= useState("");
     
     
-       
-
-    
     
     useEffect(()=>{
         if(onlyEven == true){
-            // console.log(onlyEven)
             let even = data.filter((item)=>{
                 if(parseInt(item.id) %2 === 0){
                     return item;
                 } 
             })
-            // console.log(even)
             setFilteredData(even);
         }
         else{
@@ -50,13 +39,12 @@ function Modal({modalRef,show, hide,title}) {
     useEffect( ()=>{
         // console.log(title == "All Contacts")
         const link = title.toString() == "All Contacts" ?  usContact :allContact ;
-        // console.log(link)
         setUrl(link);
         getData();
     },[page,title])
 
     const getData = async ()=>{
-        // console.log(url)
+        
         await fetch(url)
         .then((res)=> res.json())
         .then((data)=>{

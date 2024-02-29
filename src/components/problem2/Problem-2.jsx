@@ -7,7 +7,7 @@ import {Outlet,useNavigate,useLocation} from 'react-router-dom'
 
 const Problem2 = () => {
     const location = useLocation();
-    // console.log(location);
+
     const navigate = useNavigate();
     const [title, setTitle] = useState("");
 
@@ -53,12 +53,6 @@ const Problem2 = () => {
                     <div className="d-flex justify-content-center gap-3">
                         <button  className="btn btn-lg btn-outline-primary" id="all-contacts" type="button"  onClick={handleClick}>All Contacts</button>
                         <button  className="btn btn-lg btn-outline-warning" id="us-contacts" type="button"  onClick={handleClick}>US Contacts</button>
-                        {/* <Link to='/problem-2/all-contacts' className="btn btn-lg btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> setTitle("All Contacts")}>All Contacts</Link> */}
-                        {/* <Link to='/problem-2/us-contacts' className="btn btn-lg btn-outline-warning" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onClick={()=> setTitle("US Contacts")}>US Contacts</Link> */}
-                        {/* <Link to='/problem-2/all-contacts' className="btn btn-lg btn-outline-warning"  onClick={handleClick} >Test Contacts</Link> */}
-
-                        {/* <Link to='/problem-2/us-contacts' state={{prevLocation:location}} className="btn btn-lg btn-outline-warning" onClick={handleClick} >Problem - 2</Link> */}
-
                     </div>
                 </div>
             </div>

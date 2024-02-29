@@ -51,11 +51,6 @@ const Problem1 = () => {
             }
         })
 
-        // task1.sort((a, b) => {
-        //     const arr = ['active', 'completed'];
-        //     return arr.includes(a.status) || arr.includes(b.status) ? 1 : -1;
-        //   });
-
     }
 
     useEffect(()=>{

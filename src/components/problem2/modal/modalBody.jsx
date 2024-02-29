@@ -7,6 +7,7 @@ function ModalBody({handleModal,data}) {
     console.log(data)
     const [filteredData, setFilteredData] = useState([])
     const [search, setSearch] = useState('')
+    
     useEffect(()=>{
         setFilteredData(data);
     },[data])
@@ -17,11 +18,7 @@ function ModalBody({handleModal,data}) {
     },[search])
 
     const handleSearch = (e)=>{
-        // e.preventdefault;
         setSearch(e.target.value);
-        // {search =='' && setFilteredData(data)}
-    //    let searchItem = data.filter((item)=> search == '' ? item : item.phone.includes(search))
-    //     setFilteredData(searchItem);
     }
 
     return (
